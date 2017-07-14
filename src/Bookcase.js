@@ -4,20 +4,6 @@ import Bookshelf from './Bookshelf';
 
 class Bookcase extends React.Component {
 
-    static bookshelves = [
-        {
-            title: 'Currently reading',
-            name: 'currentlyReading'
-        },
-        {
-            title: 'Want to read',
-            name: 'wantToRead'
-        },
-        {
-            title: 'Read',
-            name: 'read'
-        }
-    ];
 
     render() {
         return (
@@ -27,7 +13,7 @@ class Bookcase extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        {Bookcase.bookshelves.map((bookshelf) => (
+                        {Bookshelf.bookshelves.map((bookshelf) => (
                             <Bookshelf title={bookshelf.title} key={bookshelf.name} name={bookshelf.name} />
                         ))}
                     </div>

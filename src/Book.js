@@ -1,10 +1,10 @@
 import React from 'react';
+import Bookshelf from './Bookshelf';
 
 class Book extends React.Component {
 
     render() {
-        let {id, image, title, author, bookshelfName} = this.props;
-
+        let {id, image, title, authors, bookshelfName} = this.props;
         return (
             <div className="book">
                 <div className="book-top">
@@ -12,15 +12,15 @@ class Book extends React.Component {
                     <div className="book-shelf-changer">
                         <select value={bookshelfName}>
                             <option value="none" disabled>Move to...</option>
-                            <option value="currentlyReading">Currently Reading</option>
-                            <option value="wantToRead">Want to Read</option>
-                            <option value="read">Read</option>
+                            {Bookshelf.bookshelves.map((bookshelf) => (
+                                <option key={bookshelf.name} value={bookshelf.name}>{bookshelf.title}</option>
+                            ))}
                             <option value="none">None</option>
                         </select>
                     </div>
                 </div>
                 <div className="book-title">{title}</div>
-                <div className="book-authors">{bookshelfName} {author}</div>
+                <div className="book-authors">{(typeof authors === 'object')?authors.join(', '):''}</div>
             </div>
         );
     }
