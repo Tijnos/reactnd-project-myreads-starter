@@ -1,7 +1,15 @@
 import React from 'react';
 import Book from './Book';
+import PropTypes from 'prop-types';
 
 class Bookshelf extends React.Component {
+
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        books: PropTypes.array.isRequired,
+        moveToShelf: PropTypes.func.isRequired
+    };
 
     static bookshelves = [
         {
@@ -18,43 +26,21 @@ class Bookshelf extends React.Component {
         }
     ];
 
-    static books = [
-        {
-            id: 1,
-            imageLinks: {
-                smallThumbnail: "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-                thumbnail: "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-            },
-            image: 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api',
-            title: 'To Kill a Mockingbird',
-            authors: ['Harper Lee'],
-        },
-        {
-            id: 2,
-            imageLinks: {
-                smallThumbnail: "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-                thumbnail: "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-            },
-            title: 'Ender\'s Game',
-            authors: ['Harper Lee'],
-        },
-    ];
-
     render() {
-        let {title, name} = this.props;
+        let {title, name, books, moveToShelf} = this.props;
 
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{title}</h2>
+
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {Bookshelf.books.map((book) => (
+                        {books.map((book) => (
                             <li key={book.id}>
                                 <Book
-                                    image={book.imageLinks.thumbnail}
-                                    authors={book.authors}
+                                    book={book}
+                                    moveToShelf={moveToShelf}
                                     bookshelfName={name}
-                                    title={book.title}
                                 />
                             </li>
                         ))}
