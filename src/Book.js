@@ -12,16 +12,8 @@ class Book extends React.Component {
 
     static noImage = 'http://via.placeholder.com/128x193?text=No+image';
 
-    state = {
-        bookshelfName: ''
-    };
-
     render() {
         let {book, bookshelfName, moveToShelf} = this.props;
-
-        if (this.state.bookshelfName) {
-            bookshelfName = this.state.bookshelfName;
-        }
 
         return (
             <div className="book">
@@ -32,17 +24,16 @@ class Book extends React.Component {
                         <select value={bookshelfName} onChange={(event => {
                             let bookshelfName = event.target.value;
 
-                            this.setState({
-                                bookshelfName: bookshelfName
-                            });
-
                             moveToShelf(book, bookshelfName);
                         })}>
                             <option value="none" disabled>Move to...</option>
                             {Bookshelf.bookshelves.map((bookshelf) => (
-                                <option key={bookshelf.name} value={bookshelf.name}>{bookshelf.title}</option>
+                                (<option key={bookshelf.name} value={bookshelf.name}>{bookshelf.title}</option>)
                             ))}
-                            <option value="none">None</option>
+
+                            {bookshelfName !== 'none' && (
+                                <option value="none">None</option>
+                            )}
                         </select>
                     </div>
                 </div>
