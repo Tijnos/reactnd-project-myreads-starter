@@ -27,9 +27,9 @@ class Book extends React.Component {
                             moveToShelf(book, bookshelfName);
                         })}>
                             <option value="none" disabled>Move to...</option>
-                            {Bookshelf.bookshelves.map((bookshelf) => (
-                                (<option key={bookshelf.name} value={bookshelf.name}>{bookshelf.title}</option>)
-                            ))}
+                            {Bookshelf.bookshelves.map((bookshelf) => ((
+                                <option key={bookshelf.name} value={bookshelf.name}>{bookshelf.title}</option>
+                            )))}
 
                             {bookshelfName !== 'none' && (
                                 <option value="none">None</option>
